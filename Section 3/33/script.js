@@ -1,11 +1,25 @@
-'use strict';
+"use strict";
 
-let hasDriversLicense = false;
-const passTest = true;
+function logger() {
+  console.log("My name is Lirone");
+}
 
-if (passTest) hasDriversLicense = true;
-if (hasDriversLicense) console.log('I can drive :D');
+// calling / running / invoking function
 
-// const interface = 'Audio';
-// const private = 534;
+logger();
+logger();
+logger();
 
+function fruitProcessor(apples, oranges) {
+  console.log(apples, oranges);
+  const juice = `Juice with ${apples} apples and ${oranges} oranges.`;
+  return juice;
+}
+
+const appleJuice = fruitProcessor(3, 2);
+console.log(appleJuice);
+
+const appleOrangeJuice = fruitProcessor(2, 4);
+console.log(appleOrangeJuice);
+
+console.log(fruitProcessor(2, 5));
