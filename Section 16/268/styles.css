@@ -1,0 +1,24 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+background-color: #f3f3f3;
+}
+
+.imgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 5rem;
+}
+
+img {
+  width: 20vw;
+  height: 10vh;
+  object-fit: cover;
+}
+
+.parallel {
+    background-color: #fff;
+    padding: 5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
