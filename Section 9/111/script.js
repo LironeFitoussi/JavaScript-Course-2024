@@ -27,7 +27,7 @@ operator.
 Test data for 6.: First, use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'.
 Then, call the function again with players from game.scored
 */
- 
+
 const game = {
   team1: 'Bayern Munich',
   team2: 'Borrussia Dortmund',
@@ -69,22 +69,33 @@ const game = {
   },
 };
 
+// 1.
 const [players1, players2] = game.players;
-console.log(players1, players2);
 
+// 2.
 const[gk, ...fieldPlayers] = players1;
 
+// 3.
 const allPlayers = [...players1, ...players2];
 
+// 4.
 const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
 
+// 5.
 const {team1, x: draw, team2} = game.odds;
 
-const playersGoals = {};
+// 6.
+const printGoals = (...players) => {
+  console.log(`${players.length} goals were scored`);
+  players.forEach((player) => {
+    console.log(player);
+  })
+};
 
-function printGoals(...players) {
-  players.forEach(player => {
-    playersGoals[player] = (playersGoals[player] || 0) + 1;
-    console.log(player, playersGoals);
-  });
-}
+// printGoals('Davies', 'Muller', 'Lewandowski', 'Kimmich')
+printGoals(...game.scored)
+
+// 7.
+team1 < team2 && console.log("Team 1 is more likely to win");
+
+team1 > team2 && console.log("Team 2 is more likely to win");
