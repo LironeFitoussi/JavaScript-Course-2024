@@ -4,7 +4,7 @@ const wait = function (seconds) {
   return new Promise(function (resolve) {
     setTimeout(resolve, seconds * 1000);
   });
-}
+};
 
 
 const createImage = function (imgPath) {
@@ -52,6 +52,7 @@ const loadNPause = async function () {
   try {
     let img = await createImage("img/img-1.jpg");
     console.log("Image 1 loaded");
+<<<<<<< Updated upstream
     await wait(2);
     img.style.display = "none";
     img = await createImage("img/img-2.jpg");
@@ -87,3 +88,39 @@ const loadAll = async function (imgArr) {
 };
 
 loadAll(imgArr);
+=======
+    return wait(2);
+  })
+  .then(() => {
+    currentImg.style.display = "none";
+    return createImage("img/img-2.jpg");
+  })
+  .then((img) => {
+    currentImg = img;
+    console.log("Image 2 loaded");
+    return wait(2);
+  })
+  .then(() => {
+    currentImg.style.display = "none";
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
+const loadNPause = async function () {
+  try {
+    let img = await createImage("img/img-1.jpg");
+    console.log("Image 1 loaded");
+    await wait(2);
+    img.style.display = "none";
+    img = await createImage("img/img-2.jpg");
+    console.log("Image 2 loaded");
+    await wait(2);
+    img.style.display = "none";
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+loadNPause();
+>>>>>>> Stashed changes
