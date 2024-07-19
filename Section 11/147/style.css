@@ -243,17 +243,9 @@ h2 {
 .form.form--loan {
   grid-template-columns: 2.5fr 1fr 2.5fr;
 }
-<<<<<<< HEAD
-
 .form__label--loan {
   grid-row: 2;
 }
-
-=======
-.form__label--loan {
-  grid-row: 2;
-}
->>>>>>> 8979986076a426b9c14cc4235367fe3b343efb7a
 /* End exceptions */
 
 .form__input {
@@ -302,8 +294,4 @@ h2 {
 
 .timer {
   font-weight: 600;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 8979986076a426b9c14cc4235367fe3b343efb7a

@@ -71,50 +71,48 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
+/////////////////////////////////////////////////
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-/////////////////////////////////////////////////
-<<<<<<< HEAD
-=======
+// for (const movement of movements) {
+//   if (movement > 0) {
+//     console.log(`You deposited ${movement}`);
+//   } else {
+//     console.log(`You withdraw ${Math.abs(movement)}`);
+//   }
+// }
+
+// for (const [i, movement] of movements.entries()) {
+//   if (movement > 0) {
+//     console.log(`Movment ${i+1} You deposited ${movement}`);
+//   } else {
+//     console.log(`Movment ${i+1} You withdraw ${Math.abs(movement)}`);
+//   }
+// }
+
+// console.log('---- FOREACH ----');
+// movements.forEach(movement => {
+//   console.log(
+//     `You ${
+//       movement > 0 ? 'deposited ' + movement : 'withdraw ' + Math.abs(movement)
+//     }`
+//   );
+// });
 
 
-let arr = ['a', 'b', 'c', 'd', 'e'];
+// function(200)
+// function(450)
+// function(400)
+// ...
 
-// SLICE
-/*
-console.log(arr.slice(2));
-console.log(arr.slice(2, 4));
-console.log(arr.slice(-2));
-console.log(arr.slice(-1));
-console.log(arr.slice(1, -2));
-console.log(arr.slice());
-console.log([...arr]);
-*/
-
-// SPLICE
-/*
-console.log(arr.splice(2));
-arr.splice(-1);
-console.log(arr);
-arr.splice(1, 2);
-console.log(arr);
-*/
+movements.forEach(function (mov, i, array) {
+  // console.log(array); //[200, 450, -400, 3000, -650, -130, 70, 1300]
+  if (mov > 0) {
+    console.log(`Movment ${i+1} You deposited ${mov}`);
+  } else {
+    console.log(`Movment ${i+1} You withdraw ${Math.abs(mov)}`);
+  }
+});
 
 
-// REVERSE
-arr = ['a', 'b', 'c', 'd', 'e'];
-const arr2 = ['j', 'i', 'h', 'g', 'f'];
-/*
-console.log(arr2.reverse());
-console.log(arr2);
-*/
-
-// CONCAT
-
-const letters = arr.concat(arr2)
-console.log(letters);
-console.log([...arr, ...arr2]);
-
-// JOIN
-console.log(letters.join(" - "));
->>>>>>> 8979986076a426b9c14cc4235367fe3b343efb7a
