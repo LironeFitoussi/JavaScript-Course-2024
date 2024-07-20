@@ -249,57 +249,28 @@ btnSort.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 
 // LECTURES
-// Math and Rounding
-console.log(Math.sqrt(25)); // square root of 25 // 5
-console.log(25 ** (1 / 2)); // 25 to the power of 1/2 // 5
 
-console.log(8 ** (1 / 3)); // 8 to the power of 1/3 // 2
+// Remainder operator also called modulo
+console.log(5 % 2); // 1
+console.log(5 / 2); // 5 = 2 * 2 + 1
 
-// Math.max and Math.min
-console.log(Math.max(5, 18, 23, 11, 2)); // 23
-console.log(Math.max(5, 18, '23', 11, 2)); // 23
-console.log(Math.max(5, 18, '23px', 11, 2)); // NaN
+console.log(8 % 3); // 2
+console.log(8 / 3); // 8 = 2 * 3 + 2
 
-console.log(Math.min(5, 18, 23, 11, 2)); // 2
+console.log(6 % 2); // 0
+console.log(6 / 2); // 6 = 3 * 2 + 0
 
-// Math.PI
-console.log(Math.PI); // 3.141592653589793
+console.log(7 % 2); // 1
+console.log(7 / 2); // 7 = 3 * 2 + 1
 
-// Calaculating the area of a circle
-console.log(Math.PI * Number.parseFloat('10px') ** 2); // 314.1592653589793
+const isEven = n => n % 2 === 0;
+console.log(isEven(8)); // true
+console.log(isEven(23)); // false
+console.log(isEven(514)); // true
 
-// Random number
-console.log(Math.trunc(Math.random())); // random number between 0 and 1
-console.log(Math.trunc(Math.random() * 6) + 1); // random number between 1 and 6
-
-const randomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min) + 1) + min;
-// 0...1 -> 0...(max - min) -> min...max
-console.log(randomInt(10, 20));
-
-// Rounding integers
-// .trunc() removes the decimal part of a number
-console.log(Math.trunc(23.3)); // 23
-console.log(Math.trunc(23.9)); // 23
-
-// .round() rounds to the nearest integer
-console.log(Math.round(23.3)); // 23
-console.log(Math.round(23.9)); // 24
-
-// .ceil() rounds up
-console.log(Math.ceil(23.3)); // 24
-console.log(Math.ceil(23.9)); // 24
-
-// .floor() rounds down
-console.log(Math.floor(23.3)); // 23
-console.log(Math.floor('23.9')); // 23
-
-// trunc vs floor with negative numbers
-console.log(Math.trunc(-23.3)); // -23
-console.log(Math.floor(-23.3)); // -24
-
-// Rounding decimals - toFixed() ! returns a string
-console.log((2.7).toFixed(0)); // 3 
-console.log((2.7).toFixed(3)); // 2.700
-console.log((2.345).toFixed(2)); // 2.35
-console.log(+(2.345).toFixed(2)); // 2.35 //converts string to number
+labelBalance.addEventListener('click', function () {
+  [...document.querySelectorAll('.movements__row')].forEach((row, i) => {
+    if (i % 2 === 0) row.style.backgroundColor = 'orangered';
+    if (i % 3 === 0) row.style.backgroundColor = 'blue';
+  });
+});
