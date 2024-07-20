@@ -100,7 +100,7 @@ const calcDisplayBalance = acc => {
 // calcDisplayBalance(account1.movements);
 
 const calcDisplaySummary = (acc) => {
-  console.log(acc);
+  // console.log(acc);
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
@@ -151,9 +151,9 @@ let currentAccount
 // Event handlers
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
-  console.log('LOGIN');
+  // console.log('LOGIN');
   currentAccount = accounts.find(acc => acc.username === inputLoginUsername.value);
-  console.log(currentAccount);
+  // console.log(currentAccount);
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
     // 1. Display UI and message
     labelWelcome.textContent = `Welcome back, ${currentAccount.owner.split(' ')[0]}`;
@@ -204,7 +204,7 @@ btnClose.addEventListener('click', function (e) {
   if (inputCloseUsername.value === currentAccount.username &&
     Number(inputClosePin.value) === currentAccount.pin) {
     const index = accounts.findIndex(acc => acc.username === currentAccount.username);
-    console.log(index);
+    // console.log(index);
     accounts.splice(index, 1);
     inputCloseUsername.value = inputClosePin.value = '';
     containerApp.style.opacity = 0;
@@ -219,4 +219,31 @@ btnSort.addEventListener('click', function (e) {
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 /////////////////////////////////////////////////
+
+// Strings
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort());
+
+// Numbers
+console.log(movements);
+console.log(movements.sort()); // it doesn't work as expected // [ -130, -400, -650, 1300, 200, 3000, 450, 70 ] 
+// Solution: use callback function
+
+// Ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+
+movements.sort((a, b) => a - b);
+console.log(movements); // [ -650, -400, -130, 70, 200, 450, 1300, 3000 ]
+
+// Descending
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+
+console.log(movements); // [ 3000, 1300, 450, 200, 70, -130, -400, -650 ]
 
