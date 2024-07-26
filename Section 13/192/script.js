@@ -73,31 +73,41 @@ buttonScrollTo.addEventListener('click', () => section1.scrollIntoView({ behavio
 
 const h1 = document.querySelector('h1');
 
-// Old way to add event listener to an element
-// h1.onmouseenter = () => {
-//   alert('onmouseenter: Great! You are reading the heading :D');
-// };
-
-// New way to add event listener to an element
-// h1.addEventListener('mouseenter', () => {
-//   alert('addEventListener: Great! You are reading the heading :D');
-// });
-
-// 1. Allowing to add multiple event listeners to the same element
-// 2. Allowing to remove the event listener from the element
-
-// Splitted the function to a named function
 const alertH1 = function (e) {
   alert('addEventListener: Great! You are reading the heading :D');
 }
-
-// Adding the event listener to the element
-// h1.addEventListener('mouseenter', alertH1);
-
-// Removing the event listener from the element after certain time
-// setTimeout(() => h1.removeEventListener('mouseenter', alertH1), 3000);
-
-// Removing the event listener from the element after one use
 h1.addEventListener('mouseenter', alertH1, { once: true });
 
 
+// Bubbuling and Capturing
+// rgb(255,255,255)
+const randomInt = (min, max) => 
+  Math.floor(Math.random() * (max - min + 1) + min);
+
+const randomColor = () =>
+  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+ console.log(randomColor());
+
+  document.querySelector('.nav__link').addEventListener('click', function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('LINK', e.target, e.currentTarget);
+    console.log(e.currentTarget === this);
+
+    // Stop propagation
+    // e.stopPropagation();
+  });
+
+  document.querySelector('.nav__links').addEventListener('click', function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('CONTAINER', e.target, e.currentTarget);
+  });
+
+  document.querySelector('.nav').addEventListener('click', function (e) {
+    this.style.backgroundColor = randomColor();
+    console.log('NAV', e.target, e.currentTarget);
+  }, 
+  // true); // true: capturing phase, false: bubbling phase
+  );
+
+  // Capturing Phase: the event goes down to the target element
+  // Bubbling Phase: the event bubbles up to the parent elements
