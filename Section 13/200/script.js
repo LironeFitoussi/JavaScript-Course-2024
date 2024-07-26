@@ -8,7 +8,6 @@ const buttonScrollTo = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 const header = document.querySelector('.header');
 const allSections = document.querySelectorAll('.section');
-const slides = document.querySelectorAll('.slide');
 
 const openModal = function (e) {
   e.preventDefault();
@@ -159,6 +158,28 @@ allSections.forEach(section => {
   section.classList.add('section--hidden');
 });
 
-// Slider
+// Lazy loading images
+const imgTargets = document.querySelectorAll('img[data-src]');
 
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
 
+  if (!entry.isIntersecting) return;
+
+  // Replace src with data-src
+  entry.target.src = entry.target.dataset.src;
+
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+
+  observer.unobserve(entry.target);
+}
+
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '100px'
+});
+
+imgTargets.forEach(img => imgObserver.observe(img));
