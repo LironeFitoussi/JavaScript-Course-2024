@@ -66,41 +66,19 @@ message.style.height = (Number.parseFloat(getComputedStyle(message).height) + 30
 
 document.documentElement.style.setProperty('--color-primary', 'orangered');
 
-// Attributes
-const logo = document.querySelector('.nav__logo');
-console.log(logo.alt); // Bankist logo
-console.log(logo.src); // http://
-console.log(logo.className); // nav__logo
+const buttonScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
-logo.alt = 'Beautiful minimalist logo'; // change the alt attribute
-console.log(logo.alt); // Beautiful minimalist logo
+buttonScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
 
-// Non-standard
-console.log(logo.designer); // undefined because it's not an attribute
-console.log(logo.getAttribute('designer')); // Jonas because it's an attribute
+  console.log(e.target.getBoundingClientRect());
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
 
-logo.setAttribute('company', 'Bankist'); // set the attribute
+  console.log('height/width viewport', document.documentElement.clientHeight, document.documentElement.clientWidth);
 
-console.log(logo.src); // http://127.0.0.1:5500/img/logo.png
-console.log(logo.getAttribute('src')); // img/logo.png
-
-// on links
-const link = document.querySelector('.twitter-link');
-console.log(link.href); // http://twitter.com/jonasschmedtman
-console.log(link.getAttribute('href')); // http://twitter.com/jonasschmedtman
-
-const link2 = document.querySelector('.nav__link--btn');
-console.log(link2.href); // http://127.0.0.1:8080/188/#
-console.log(link2.getAttribute('href')); // #
-
-// Data attributes
-console.log(logo.dataset.versionNumber); // 3.0
-
-// Classes
-logo.classList.add('c', 'j'); // add multiple classes
-logo.classList.remove('c', 'j'); // remove multiple classes
-logo.classList.toggle('c'); // add the class if it's not there and remove it if it's there
-logo.classList.contains('c'); // true - check if the class is there
-
-// Don't use
-logo.className = 'jonas'; // overwrite all the classes
+  // Scrolling
+  // window.scrollTo(s1coords.left + window.pageXOffset, s1coords.top + window.pageYOffset); // old way
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
