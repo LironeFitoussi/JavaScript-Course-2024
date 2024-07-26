@@ -256,3 +256,21 @@ document.addEventListener('keydown', function (e) {
   if (e.key === 'ArrowLeft') prevSlide();
   e.key === 'ArrowRight' && nextSlide();
 });
+
+
+// Document Loading
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and DOM tree built!', e);
+});
+
+window.addEventListener('load', function (e) {
+  console.log('Page fully loaded', e);
+});
+
+// the difference between DOMContentLoaded and load event is that the DOMContentLoaded event triggers when the HTML is completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading. The load event triggers when all the content on the page is fully loaded, including all images, stylesheets, and subframes.
+
+// window.addEventListener('beforeunload', function (e) {
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = 'message';
+// });
