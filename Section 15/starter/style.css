@@ -218,3 +218,33 @@ a:visited {
 .cycling-popup .leaflet-popup-content-wrapper {
   border-left: 5px solid var(--color-brand--1);
 }
+
+.action-btn {
+  border: none;
+  background-color: transparent;
+  padding: 1rem;
+  border-radius: .5rem;
+}
+
+.action-btn:hover {
+  cursor: pointer;
+
+}
+
+.delete-btn {
+  grid-column-start: 4;
+  justify-self:flex-end;
+}
+
+.delete-btn:hover {
+  background-color: rgba(181, 0, 0, 0.446);
+}
+
+.edit-btn {
+  grid-column-start: 1;
+  justify-self:flex-start;
+}
+
+.edit-btn:hover {
+  background-color: rgba(0, 180, 159, 0.5)
+}
