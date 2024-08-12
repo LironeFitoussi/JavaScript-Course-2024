@@ -7,5 +7,8 @@
   },
   "author": "Lirone Fitoussi",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  }
 }
