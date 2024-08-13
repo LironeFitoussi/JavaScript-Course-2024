@@ -1,3 +1,7 @@
+import icons from 'url:../../img/icons.svg'; // Parcel 2
+import { Fraction } from 'fractional';
+// import icons from 'url:../../img/icons.svg'; // Parcel 1
+
 class RecipeView {
   #parentElement = document.querySelector('.recipe');
   #data;
@@ -11,6 +15,12 @@ class RecipeView {
 
   #clear() {
     this.#parentElement.innerHTML = '';
+  }
+
+  addHandlerRender(handler) {
+    // Listen for hashchange event and load event
+    const events = ['hashchange', 'load'];
+    events.forEach((ev) => window.addEventListener(ev, handler));
   }
 
   #generateMarkup() {
@@ -66,22 +76,7 @@ class RecipeView {
       <div class="recipe__ingredients">
         <h2 class="heading--2">Recipe ingredients</h2>
         <ul class="recipe__ingredient-list">
-          ${this.#data.ingredients
-            .map(
-              (ing) => `
-                <li class="recipe__ingredient">
-                  <svg class="recipe__icon">
-                    <use href="${icons}#icon-check"></use>
-                  </svg>
-                  <div class="recipe__quantity">${ing.quantity}</div>
-                  <div class="recipe__description">
-                    <span class="recipe__unit">${ing.unit}</span>
-                    ${ing.description}
-                  </div>
-                </li>
-              `
-            )
-            .join('')}
+          ${this.#data.ingredients.map(this.#generateMarkupIngredient).join('')}
         </ul>
       </div>
       
@@ -103,6 +98,33 @@ class RecipeView {
           </svg>
         </a>
       </div>
+    `;
+  }
+
+  renderSpinner() {
+    const markup = `
+      <div class="spinner">
+        <svg>
+          <use href="${icons}#icon-loader"></use>
+        </svg>
+      </div>
+    `;
+    this.#clear();
+    this.#parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
+
+  #generateMarkupIngredient(ing) {
+    return `
+      <li class="recipe__ingredient">
+        <svg class="recipe__icon">
+          <use href="${icons}#icon-check"></use>
+        </svg>
+        <div class="recipe__quantity">${ing.quantity ? new Fraction(ing.quantity).toString() : ''}</div>
+        <div class="recipe__description">
+          <span class="recipe__unit">${ing.unit}</span>
+          ${ing.description}
+        </div>
+      </li>
     `;
   }
 }
