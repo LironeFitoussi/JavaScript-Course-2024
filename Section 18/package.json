@@ -9,16 +9,30 @@
   },
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html --dist-dir ./dist"
+    "build": "parcel build index.html --dist-dir ./dist",
+    "format": "prettier --write .",
+    "prepare": "husky install"
   },
   "author": "Jonas Schedtmann",
   "license": "ISC",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.2.1",
-    "parcel": "^2.2.1"
+    "husky": "^8.0.0",
+    "parcel": "^2.2.1",
+    "prettier": "^3.3.3"
   },
   "dependencies": {
+    "core-js": "^3.38.0",
     "fracty": "^1.0.9",
-    "lmdb": "^3.0.13"
+    "lmdb": "^3.0.13",
+    "regenerator-runtime": "^0.14.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,json,css,scss,md}": "prettier --write"
   }
 }
