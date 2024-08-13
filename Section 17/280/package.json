@@ -1,0 +1,21 @@
+{
+  "name": "279",
+  "version": "1.0.0",
+  "scripts": {
+    "start" : "parcel index.html",
+    "build" : "parcel build index.html"
+  },
+  "browserslist": [
+       "> 0.5%",
+       "last 2 versions",
+       "not dead"
+     ],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "parcel": "^2.12.0"
+  }
+}
