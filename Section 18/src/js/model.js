@@ -40,6 +40,9 @@ export const loadRecipe = async function (id) {
 // Search Model
 export const loadSearchResults = async function (query) {
   state.search.query = query;
+
+  // Reset page to 1
+  state.search.page = 1;
   try {
     const data = await getJSON(`${API_URL}?search=${query}`);
     //? console.log(data);
