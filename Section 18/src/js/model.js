@@ -1,6 +1,6 @@
 import { async } from 'regenerator-runtime';
 import { API_URL, RES_PER_PAGE, KEY } from './config.js';
-import { getJSON, sendJSON } from './helpers.js';
+import { AJAX } from './helpers.js';
 
 export const state = {
   recipe: {},
@@ -33,7 +33,7 @@ const createRecipeObject = function (data) {
 // Recipe Model
 export const loadRecipe = async function (id) {
   try {
-    const data = await getJSON(`${API_URL}${id}`);
+    const data = await AJAX(`${API_URL}${id}?key=${KEY}`);
 
     state.recipe = createRecipeObject(data);
     // Check for bookmarks
@@ -53,10 +53,11 @@ export const loadRecipe = async function (id) {
 export const loadSearchResults = async function (query) {
   state.search.query = query;
 
+  console.log(KEY);
   // Reset page to 1
   state.search.page = 1;
   try {
-    const data = await getJSON(`${API_URL}?search=${query}`);
+    const data = await AJAX(`${API_URL}?search=${query}&key=${KEY}`);
     //? console.log(data);
 
     // Destructure data
@@ -158,7 +159,7 @@ export const uploadRecipe = async function (newRecipe) {
 
     // console.log(recipe);
     // console.log(KEY);
-    const data = await sendJSON(`${API_URL}?key=${KEY}`, recipe);
+    const data = await AJAX(`${API_URL}?key=${KEY}`, recipe);
     // console.log(data);
 
     // Check if Data is OK
