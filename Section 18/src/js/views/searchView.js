@@ -1,25 +1,25 @@
 import icons from 'url:../../img/icons.svg'; // Parcel 2
 
 class SearchView {
-  #parentElement = document.querySelector('.search');
-  #errorMessage = 'No recipes found for your query. Please try another one!';
-  #message = '';
+  _parentElement = document.querySelector('.search');
+  _errorMessage = 'No recipes found for your query. Please try another one!';
+  _message = '';
 
   getQuery() {
-    const query = this.#parentElement.querySelector('.search__field').value;
+    const query = this._parentElement.querySelector('.search__field').value;
     this.#clear();
     return query;
   }
 
   addHandlerSearch(handler) {
-    this.#parentElement.addEventListener('submit', function (e) {
+    this._parentElement.addEventListener('submit', function (e) {
       e.preventDefault();
       handler();
     });
   }
 
   #clear() {
-    this.#parentElement.querySelector('.search__field').value = '';
+    this._parentElement.querySelector('.search__field').value = '';
   }
 }
 
