@@ -540,11 +540,11 @@ if (module.hot) module.hot.accept();
 // Recipes Controller
 const controlRecipes = async function() {
     try {
-        // 1. Loading spinner
-        _recipeViewJsDefault.default.renderSpinner();
-        // 2. Get recipe id from URL
+        // 1. Get recipe id from URL
         const id = window.location.hash.slice(1);
         if (!id) return;
+        // 2. Loading spinner
+        _recipeViewJsDefault.default.renderSpinner();
         // 2. Update results view to mark selected search result
         _resultsViewJsDefault.default.update(_modelJs.loadSearchResultsPage());
         _bookmarksViewJsDefault.default.update(_modelJs.state.bookmarks);

@@ -20,12 +20,12 @@ if (module.hot) {
 // Recipes Controller
 const controlRecipes = async function () {
   try {
-    // 1. Loading spinner
-    recipeView.renderSpinner();
-
-    // 2. Get recipe id from URL
+    // 1. Get recipe id from URL
     const id = window.location.hash.slice(1);
     if (!id) return;
+
+    // 2. Loading spinner
+    recipeView.renderSpinner();
 
     // 2. Update results view to mark selected search result
     resultsView.update(model.loadSearchResultsPage());
