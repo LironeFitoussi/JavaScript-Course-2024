@@ -17,7 +17,6 @@
   "license": "ISC",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.2.1",
-    "husky": "^9.1.4",
     "parcel": "^2.2.1",
     "prettier": "^3.3.3"
   },
