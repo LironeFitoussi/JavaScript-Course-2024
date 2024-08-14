@@ -6,10 +6,11 @@ import searchView from './views/searchView.js';
 import bookmarksView from './views/bookmarksView.js';
 import resultsView from './views/resultsView.js';
 import paginationView from './views/paginationView.js';
+import addRecipeView from './views/addRecipeView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-import { async } from 'regenerator-runtime/runtime';
+// import { async } from 'regenerator-runtime/runtime';
 
 if (module.hot) {
   module.hot.accept();
@@ -113,6 +114,11 @@ const controlBookmarks = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
+// Control Add Recipe Form
+const controlAddRecipe = async function (newRecipe) {
+  console.log(newRecipe);
+};
+
 (function () {
   bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);
@@ -120,4 +126,5 @@ const controlBookmarks = function () {
   recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
+  addRecipeView.addHandlerUpload(controlAddRecipe);
 })();
