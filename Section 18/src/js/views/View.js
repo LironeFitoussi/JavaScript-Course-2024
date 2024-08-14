@@ -36,7 +36,7 @@ export default class View {
       // Update Changed TEXT
       if (
         !newEl.isEqualNode(curEl) &&
-        newEl.firstChild.nodeValue.trim() !== ''
+        newEl.firstChild?.nodeValue.trim() !== ''
       ) {
         //? console.log('Precise DOM Manipulation');
         curEl.textContent = newEl.textContent;

@@ -593,9 +593,22 @@ const controlServings = function(newServings) {
     // recipeView.render(model.state.recipe);
     _recipeViewJsDefault.default.update(_modelJs.state.recipe);
 };
+// Bookmark Controller
+const controlAddBookmark = function() {
+    // Add or remove bookmark
+    if (!_modelJs.state.recipe.bookmarked) _modelJs.addBookmark(_modelJs.state.recipe.id);
+    else _modelJs.deleteBookmark(_modelJs.state.recipe.id);
+    // Update recipe view
+    _recipeViewJsDefault.default.update(_modelJs.state.recipe);
+// Render bookmarks
+// bookmarksView.render(model.state.bookmarks);
+// console.log(model.state.bookmarks);
+// console.log(model.state.recipe);
+};
 (function() {
     _recipeViewJsDefault.default.addHandlerRender(controlRecipes);
     _recipeViewJsDefault.default.addHandlerUpdateServings(controlServings);
+    _recipeViewJsDefault.default.addHandlerAddBookmark(controlAddBookmark);
     _searchViewJsDefault.default.addHandlerSearch(controlSearchResults);
     _paginationViewJsDefault.default.addHandlerClick(controlPagination);
 })();
@@ -2512,6 +2525,10 @@ parcelHelpers.export(exports, "loadSearchResultsPage", ()=>loadSearchResultsPage
 );
 parcelHelpers.export(exports, "updateServings", ()=>updateServings
 );
+parcelHelpers.export(exports, "addBookmark", ()=>addBookmark
+);
+parcelHelpers.export(exports, "deleteBookmark", ()=>deleteBookmark
+);
 var _regeneratorRuntime = require("regenerator-runtime");
 var _configJs = require("./config.js");
 var _helpersJs = require("./helpers.js");
@@ -2523,7 +2540,8 @@ const state = {
         results: [],
         page: 1,
         resultsPerPage: _configJs.RES_PER_PAGE
-    }
+    },
+    bookmarks: []
 };
 const loadRecipe = async function(id) {
     try {
@@ -2539,6 +2557,9 @@ const loadRecipe = async function(id) {
             cookingTime: recipe.cooking_time,
             ingredients: recipe.ingredients
         };
+        // Check for bookmarks
+        if (state.bookmarks.some((bookmark)=>bookmark === id
+        )) state.recipe.bookmarked = true;
     // console.log(state.recipe);
     } catch (err) {
         console.error(`${err} 💥💥💥💥💥`);
@@ -2584,6 +2605,20 @@ const updateServings = function(newServings) {
         ing.quantity = ing.quantity * newServings / state.recipe.servings;
     });
     state.recipe.servings = newServings;
+};
+const addBookmark = function(recipe) {
+    // Add bookmark to bookmarks array
+    state.bookmarks.push(recipe);
+    // Add bookmark to recipe
+    state.recipe.bookmarked = true;
+};
+const deleteBookmark = function(id) {
+    // Delete bookmark from bookmarks array
+    const index = state.bookmarks.findIndex((bkmrk)=>bkmrk === id
+    );
+    state.bookmarks.splice(index, 1);
+    // Delete bookmark from recipe
+    state.recipe.bookmarked = false;
 };
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","regenerator-runtime":"dXNgZ","./config.js":"k5Hzs","./helpers.js":"hGI1E"}],"k5Hzs":[function(require,module,exports) {
@@ -2657,6 +2692,13 @@ class RecipeView extends _viewJsDefault.default {
             if (+updateTo > 0) handler(+updateTo);
         });
     }
+    addHandlerAddBookmark(handler) {
+        this._parentElement.addEventListener('click', function(e) {
+            const btn = e.target.closest('.btn--bookmark');
+            if (!btn) return;
+            handler();
+        });
+    }
     _generateMarkup() {
         return `
       <figure class="recipe__fig">
@@ -2697,9 +2739,9 @@ class RecipeView extends _viewJsDefault.default {
         
         <div class="recipe__user-generated">
         </div>
-        <button class="btn--round">
+        <button class="btn--round btn--bookmark">
           <svg class="">
-            <use href="${_iconsSvgDefault.default}#icon-bookmark-fill"></use>
+            <use href="${_iconsSvgDefault.default}#icon-bookmark${this._data.bookmarked ? '-fill' : ''}"></use>
           </svg>
         </button>
       </div>
@@ -3032,7 +3074,7 @@ class View {
             const curEl = curElements[i];
             //? console.log(curEl, newEl.isEqualNode(curEl));
             // Update Changed TEXT
-            if (!newEl.isEqualNode(curEl) && newEl.firstChild.nodeValue.trim() !== '') //? console.log('Precise DOM Manipulation');
+            if (!newEl.isEqualNode(curEl) && newEl.firstChild?.nodeValue.trim() !== '') //? console.log('Precise DOM Manipulation');
             curEl.textContent = newEl.textContent;
             // Updates Changed ATTRIBUTE
             if (!newEl.isEqualNode(curEl)) // console.log(Array.from(newEl.attributes));

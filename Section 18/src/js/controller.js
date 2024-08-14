@@ -90,9 +90,26 @@ const controlServings = function (newServings) {
   recipeView.update(model.state.recipe);
 };
 
+// Bookmark Controller
+const controlAddBookmark = function () {
+  // Add or remove bookmark
+  if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe.id);
+  else model.deleteBookmark(model.state.recipe.id);
+
+  // Update recipe view
+  recipeView.update(model.state.recipe);
+
+  // Render bookmarks
+  // bookmarksView.render(model.state.bookmarks);
+
+  // console.log(model.state.bookmarks);
+  // console.log(model.state.recipe);
+};
+
 (function () {
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 })();
